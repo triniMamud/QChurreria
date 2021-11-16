@@ -12,15 +12,11 @@ import './App.css';
 
 function App() {
 
-  const[estado,setEstado] = useState({
-    opcionesMenu:[{name:'Find ship information',path:"/topsecret"},{name:'Update split satellite data',path:"/updateSplitSatelliteData"}],
-  })
 
   return (
       <BrowserRouter>
-        <Menu opciones={estado.opcionesMenu}></Menu>
-        <Route exact path='/topsecret' component={()=><FindShipInformation/>}/>
-        <Route exact path='/shipData' render={(props)=><ShipData {...props} state={props}/>}/>
+        <Route exact path='/qChurreria' component={()=><FindShipInformation/>}/>
+        <Route exact path='/qChurreria/cargarPedido' render={(props)=><ShipData {...props} state={props}/>}/>
         <Route exact path='/topsecret_split' component={()=><SplitShipData/>}/>
         <Route exact path='/updateSplitSatelliteData' component={()=><UpdateSplitSatelliteDataMenu/>}/>
         <Route exact path='/topsecret_split/:satellite_name' component={(props)=><UpdateSplitSatelliteData {...props} state={props}/>}/>
