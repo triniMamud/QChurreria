@@ -1,24 +1,63 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
+import { Button } from 'bootstrap';
 
 class CargarPedido extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            satellite : props.location.state,
-            resp: {}
-        }
-    }
+            pedido: {
+                numeroOrden: "",
+                fechaEntrega: "",
+                cantidad: "",
+                cliente: "",
+                importe: ""
+            }
+        };
+     }
 
-    render(){
+    render() {
         return (
             <>
-                <div className="p-3">
-                    {this.state.satellite.distance == null ? <h5>The <strong>distance</strong> could not be updated</h5> : <h5>The <strong>distance</strong> was updated succesfully</h5>}
-                </div>
-                <div className="p-3">
-                    {this.state.satellite.message == null ? <h5>El <strong>message</strong> could not be updated</h5> : <h5>The <strong>message</strong> was updated successfully</h5>}
+                <div class="firstContainer">
+                    <img src="src\QChurreria.jpeg" alt="QChurreria" />
+                    <div>
+                        <div>
+                            <p>Cantidad de churros a producir mañana: {this.props.pedidos.total}</p>
+                        </div>
+                        <div>
+                            <Button><Link style={{ textDecoration: 'none' }} to='/cargarPedido'><div className="link">{opcion.name}</div></Link></Button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <table>
+                            <tr>
+                                <th>Numero de Orden</th>
+                                <th>Fecha de Entrega</th>
+                                <th>Cantidad</th>
+                                <th>Cliente</th>
+                                <th>Importe</th>
+                            </tr>
+                            {this.props.pedidos.map(pedido => 
+                                <tr>
+                                    <td>{pedido.numeroOrden}</td>
+                                    <td>{pedido.fechaEntrega}</td>
+                                    <td>{pedido.cantidad}</td>
+                                    <td>{pedido.cliente}</td>
+                                    <td>{pedido.importe}</td>
+                                    <td>
+                                        //icono del tachito
+                                    </td>
+                                </tr>
+                            )}
+                            /**
+                            <tr ng-repeat="imagen in imagesList">
+                                
+                            </tr>
+                             */
+                        </table>
+                    </div>
                 </div>
             </>
         )
