@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Button } from 'bootstrap';
+import { Link } from 'react-router-dom';
 
-class CargarPedido extends Component {
+
+class Home extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            pedido: {
-                numeroOrden: "",
-                fechaEntrega: "",
-                cantidad: "",
-                cliente: "",
-                importe: ""
-            }
+            pedidos: []
         };
      }
 
@@ -27,7 +22,7 @@ class CargarPedido extends Component {
                             <p>Cantidad de churros a producir mañana: {this.props.pedidos.total}</p>
                         </div>
                         <div>
-                            <Button><Link style={{ textDecoration: 'none' }} to='/cargarPedido'><div className="link">{opcion.name}</div></Link></Button>
+                            <Button><Link style={{ textDecoration: 'none' }} to='/cargarPedido'><div className="link"></div></Link></Button>
                         </div>
                     </div>
                     <div class="container">
@@ -65,4 +60,4 @@ class CargarPedido extends Component {
 
 }
 
-export default SatelliteData;
+export default Home;
