@@ -8,10 +8,16 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pedidos: []
+            pedidos: [{
+                numeroOrden: "",
+                fechaEntrega: "",
+                cantidad: "",
+                cliente: "",
+                importe: ""
+            }]
         };
      }
-
+ 
     render() {
         return (
             <>
