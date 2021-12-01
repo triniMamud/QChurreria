@@ -1,12 +1,11 @@
-import Home from './components/CargarPedido';
-import CargarPedido from './components/Home';
+import Home from './components/Home';
+import CargarPedido from './components/CargarPedido';
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Route, Redirect} from 'react-router-dom';
 import './App.css';
 
 function App() {
-
 
   return (
       <BrowserRouter>

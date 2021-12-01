@@ -1,61 +1,86 @@
-import React, { useState } from 'react';
-import { Link, Router } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
-import '../styles/FindShipInformation.css';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+const { React, Component, useState } = require('react');
+const { pedidos } = require('./Home');
+const { Form, Button } = require('react-bootstrap');
 
+class CargarPedido extends Component {
 
-function CargarPedido() {
+    constructor(props) {
+        super(props);
 
+        this.redireccionar = this.redireccionar.bind(this);
 
-    const [pedido, setPedido] = useState({
-        //cosas del pedido
-    })
+        this.pedido = {
+            id: "",
+            fecha: "",
+            cantidad: "",
+            cliente: "",
+            importe: ""
+        }
 
-    const [pedidos, setPedidos] = useState(['']);
-
-    let history = useHistory();
-
-    let handleForm = (event, valor) => {
-        history.push(
-            {
-                pathname: "/cargarPedido",
-                state: pedidos
-            }
-        );
-        event.stopPropagation();
-        event.preventDefault();
+        this.pedidos = JSON.parse(localStorage.getItem('arrayPedidos'));
+        
     }
 
-    return (
-        <div className="form">
-            <Form onSubmit={handleForm}>
-                <h2>Cargar nuvo pedido</h2>
-                <div className="d-flex justify-content-center">
-                    <div className="p-3 mr-5 ml-5 container">
-                        <Form.Group controlId="nroOrden">
-                            <Form.Control type="number" placeholder="Numero de Orden" name="distance" value={pedido.nroOrden}/>
-                        </Form.Group>
-                        <Form.Group controlId="fechaEntrega">
-                            <Form.Control type="date" placeholder="Fecha de Entrega" name="date" value={pedido.fecha}/>
-                        </Form.Group>
-                        <Form.Group controlId="cantidad">
-                            <Form.Control type="number" placeholder="Cantidad" name="date" value={pedido.cantidad}/>
-                        </Form.Group>
-                        <Form.Group controlId="cliente">
-                            <Form.Control type="text" placeholder="Nombre del Cliente" name="date" value={pedido.cliente}/>
-                        </Form.Group>
-                        <Form.Group controlId="importe">
-                            <Form.Control type="text" placeholder="Importe" name="date" value={pedido.importe}/>
-                        </Form.Group>
-                    </div>
-                </div>
-                <Button className="mt-5 mb-5 mr-2 ml-2" size="lg" variant="info" type="submit">Cargar pedido</Button>
-            </Form>
-        </div>
-    )
+    handleDatos = (event) => {
+        this.setState({
+            value: event.target.value
+        })
+    };
 
+    handleForm = (e) => {
+        const id = document.getElementById("id").value;
+        const fecha = document.getElementById("fecha").value;
+        const cantidad  = document.getElementById("cantidad").value;
+        const cliente = document.getElementById("cliente").value;
+        const importe = document.getElementById("importe").value;
+
+        this.pedido.id = id;
+        this.pedido.fecha = fecha;
+        this.pedido.cantidad = cantidad;
+        this.pedido.cliente = cliente;
+        this.pedido.importe = importe;
+
+
+        console.log(this.pedido);
+
+        this.pedidos.push(this.pedido);
+
+        //e.stopPropagation();
+        //e.preventDefault();
+    };
+
+    redireccionar = () => {
+        this.props.history.push('/cargarPedido');
+    }
+
+    render () {
+        return (
+            <div className="form">
+                <Form onSubmit={this.handleForm}>
+                    <h2>Cargar nuevo pedido</h2>
+                    <div className=" justify-content-center">
+                        <div className="p-3 mr-5 ml-5 container">
+                            <input disabled={true} type= "text" id="id" value={this.pedidos[this.pedidos.length-1].numeroOrden+1 }/>
+                        </div>
+                        <div className="p-3 mr-5 ml-5 container">
+                            <input type="date" placeholder="Fecha de Entrega" id="fecha" onChange={this.handleDatos}/>
+                        </div>
+                        <div className="p-3 mr-5 ml-5 container">
+                            <input type="number" placeholder="Cantidad" id="cantidad" onChange={this.handleDatos}/>
+                        </div>
+                        <div className="p-3 mr-5 ml-5 container">
+                            <input type="text" placeholder="Nombre del Cliente" id="cliente" onChange={this.handleDatos}/>
+                        </div>
+                        <div className="p-3 mr-5 ml-5 container">
+                            <input type="text" placeholder="Importe" id="importe" onChange={this.handleDatos}/>
+                        </div>
+                    </div>
+                    <Button className="mt-5 mb-5 mr-2 ml-2" size="lg" variant="info" type="submit">Cargar pedido</Button>
+                    <Button className="mt-5 mb-5 mr-2 ml-2" size="lg" variant="info" onClick={this.redireccionar}> Cancelar </Button>
+                </Form>
+            </div>
+        )
+    }
 }
 
 export default CargarPedido;
