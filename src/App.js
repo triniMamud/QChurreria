@@ -1,16 +1,18 @@
-import Home from './components/CargarPedido';
-import CargarPedido from './components/Home';
+import Home from './components/Home';
+import CargarPedido from './components/CargarPedido';
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
-import {Route} from 'react-router-dom';
+import {Route, Redirect} from 'react-router-dom';
 import './App.css';
 
 function App() {
 
 
   return (
+
       <BrowserRouter>
-        <Route exact path='/qChurreria' render={(props)=><Home {...props} state={props}/>}/>
+        <Redirect to="/qChurreria" />
+        <Route exact path='/qChurreria' component={(props)=><Home {...props} state={props}/>}/>
         <Route exact path='/cargarPedido' component={()=><CargarPedido/>}/>
       </BrowserRouter>   
   );
