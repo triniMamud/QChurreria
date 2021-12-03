@@ -1,6 +1,6 @@
 const { React } = require("react");
+const { useHistory } = require("react-router-dom")
 const { Form, Button } = require("react-bootstrap");
-const { useHistory } = require("react-router");
 
 const CargarPedido = () => {
 
@@ -29,7 +29,7 @@ const CargarPedido = () => {
         //e.stopPropagation();
         //e.preventDefault();
     };
-  
+
     const redireccionar = () => {
         history.push("/qChurreria");
     };
@@ -48,16 +48,16 @@ const CargarPedido = () => {
                         />
                     </div>
                     <div className="p-3 mr-5 ml-5 container">
-                        <input type="date" placeholder="Fecha de Entrega" id="fecha" />
+                        <input type="date" placeholder="Fecha de Entrega" id="fecha" min={new Date()} required/>
                     </div>
                     <div className="p-3 mr-5 ml-5 container">
-                        <input type="number" placeholder="Cantidad" id="cantidad" />
+                        <input type="number" placeholder="Cantidad" id="cantidad" required/>
                     </div>
                     <div className="p-3 mr-5 ml-5 container">
-                        <input type="text" placeholder="Nombre del Cliente" id="cliente" />
+                        <input type="text" placeholder="Nombre del Cliente" id="cliente" required/>
                     </div>
                     <div className="p-3 mr-5 ml-5 container">
-                        <input type="text" placeholder="Importe" id="importe" />
+                        <input type="number" placeholder="Importe" id="importe" required/>
                     </div>
                 </div>
                 <Button className="mt-5 mb-5 mr-2 ml-2" size="lg" variant="info" type="submit">
