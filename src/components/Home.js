@@ -55,13 +55,9 @@ const Home = () => {
                         )}
                     </tbody>
                 </Table>
-
             </Container>
-
         </>
     )
 }
 
 export default Home;
-
-

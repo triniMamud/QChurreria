@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 const { React, Component, useState } = require("react");
 const { Form, Button } = require("react-bootstrap");
 
-
 const CargarPedido = () => {
 
     const history = useHistory();
