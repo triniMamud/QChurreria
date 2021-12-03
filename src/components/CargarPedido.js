@@ -29,7 +29,7 @@ const CargarPedido = () => {
         //e.stopPropagation();
         //e.preventDefault();
     };
-
+  
     const redireccionar = () => {
         history.push("/qChurreria");
     };
