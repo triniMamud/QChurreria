@@ -1,11 +1,6 @@
-import { useHistory } from "react-router";
-import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-
-const { React, Component, useState } = require("react");
+const { React } = require("react");
 const { Form, Button } = require("react-bootstrap");
+const { useHistory } = require("react-router");
 
 const CargarPedido = () => {
 
@@ -34,7 +29,7 @@ const CargarPedido = () => {
         //e.stopPropagation();
         //e.preventDefault();
     };
-
+  
     const redireccionar = () => {
         history.push("/qChurreria");
     };

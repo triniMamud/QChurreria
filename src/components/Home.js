@@ -1,12 +1,11 @@
-import React, { Component, useEffect, useState } from 'react';
-//import { Button } from 'bootstrap';
-import { Link } from 'react-router-dom';
-import { Button, Table, Container } from 'reactstrap';
-import CargarPedido from './CargarPedido';
-import Imagen from '../QChurreria.jpeg'
+import Imagen from "../QChurreria.jpeg";
+const { React, useEffect, useState } = require("react");
+const { Link } = require("react-router-dom");
+const { Table, Container, Button } = require("react-bootstrap");
 
 const Home = () => {
 
+    const mañana = new Date((new Date).getTime() + (24 * 60 * 60 * 1000));
     const [pedidos, setPedidos] = useState([]);
 
     useEffect(() => {
@@ -24,7 +23,14 @@ const Home = () => {
             <Container>
                 <img src={Imagen} alt="QChurreria" />
                 <div>
-                    <h3>Cantidad de churros a producir mañana: {pedidos.reduce((a, b) => a + (b.cantidad*1 || 0), 0)} </h3>
+                    <h3>Cantidad de churros a producir mañana: { pedidos
+                        .filter(pedido => 
+                            mañana.getDate() === (new Date(pedido.fechaEntrega+"\n")).getDate() &&
+                            mañana.getMonth() === (new Date(pedido.fechaEntrega+"\n")).getMonth() &&
+                            mañana.getFullYear() === (new Date(pedido.fechaEntrega+"\n")).getFullYear())
+                        .reduce((a, b) => a + (b.cantidad*1 || 0), 0)
+                        }
+                    </h3>
                 </div>
                 <br />
                 <Link to="/cargarPedido" style={{ textDecoration: 'none' }}>
