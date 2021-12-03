@@ -7,10 +7,12 @@ import './App.css';
 
 function App() {
 
+
   return (
+
       <BrowserRouter>
         <Redirect to="/qChurreria" />
-        <Route exact path='/qChurreria' render={(props)=><Home {...props} state={props}/>}/>
+        <Route exact path='/qChurreria' component={(props)=><Home {...props} state={props}/>}/>
         <Route exact path='/cargarPedido' component={()=><CargarPedido/>}/>
       </BrowserRouter>   
   );

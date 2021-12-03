@@ -1,86 +1,76 @@
-const { React, Component, useState } = require('react');
-const { pedidos } = require('./Home');
-const { Form, Button } = require('react-bootstrap');
+import { useHistory } from "react-router";
 
-class CargarPedido extends Component {
+const { React, Component, useState } = require("react");
+const { Form, Button } = require("react-bootstrap");
 
-    constructor(props) {
-        super(props);
 
-        this.redireccionar = this.redireccionar.bind(this);
+const CargarPedido = () => {
 
-        this.pedido = {
-            id: "",
-            fecha: "",
-            cantidad: "",
-            cliente: "",
-            importe: ""
-        }
+    const history = useHistory();
+    const pedidos = JSON.parse(localStorage.getItem("arrayPedidos")) || [];
 
-        this.pedidos = JSON.parse(localStorage.getItem('arrayPedidos'));
-        
-    }
-
-    handleDatos = (event) => {
-        this.setState({
-            value: event.target.value
-        })
-    };
-
-    handleForm = (e) => {
-        const id = document.getElementById("id").value;
-        const fecha = document.getElementById("fecha").value;
-        const cantidad  = document.getElementById("cantidad").value;
+    const handleForm = (e) => {
+        const numeroOrden = document.getElementById("id").value;
+        const fechaEntrega = document.getElementById("fecha").value;
+        const cantidad = document.getElementById("cantidad").value;
         const cliente = document.getElementById("cliente").value;
         const importe = document.getElementById("importe").value;
 
-        this.pedido.id = id;
-        this.pedido.fecha = fecha;
-        this.pedido.cantidad = cantidad;
-        this.pedido.cliente = cliente;
-        this.pedido.importe = importe;
+        const pedido = {
+            numeroOrden,
+            fechaEntrega,
+            cantidad,
+            cliente,
+            importe,
+        };
 
-
-        console.log(this.pedido);
-
-        this.pedidos.push(this.pedido);
+        console.log(pedidos);
+        pedidos.push(pedido);
+        localStorage.arrayPedidos = JSON.stringify(pedidos);
 
         //e.stopPropagation();
         //e.preventDefault();
     };
 
-    redireccionar = () => {
-        this.props.history.push('/cargarPedido');
-    }
+    const redireccionar = () => {
+        history.push("/qChurreria");
+    };
 
-    render () {
-        return (
-            <div className="form">
-                <Form onSubmit={this.handleForm}>
-                    <h2>Cargar nuevo pedido</h2>
-                    <div className=" justify-content-center">
-                        <div className="p-3 mr-5 ml-5 container">
-                            <input disabled={true} type= "text" id="id" value={this.pedidos[this.pedidos.length-1].numeroOrden+1 }/>
-                        </div>
-                        <div className="p-3 mr-5 ml-5 container">
-                            <input type="date" placeholder="Fecha de Entrega" id="fecha" onChange={this.handleDatos}/>
-                        </div>
-                        <div className="p-3 mr-5 ml-5 container">
-                            <input type="number" placeholder="Cantidad" id="cantidad" onChange={this.handleDatos}/>
-                        </div>
-                        <div className="p-3 mr-5 ml-5 container">
-                            <input type="text" placeholder="Nombre del Cliente" id="cliente" onChange={this.handleDatos}/>
-                        </div>
-                        <div className="p-3 mr-5 ml-5 container">
-                            <input type="text" placeholder="Importe" id="importe" onChange={this.handleDatos}/>
-                        </div>
+    return (
+        <div className="form">
+            <Form onSubmit={handleForm}>
+                <h2>Cargar nuevo pedido</h2>
+                <div className=" justify-content-center">
+                    <div className="p-3 mr-5 ml-5 container">
+                        <input
+                            disabled
+                            type="text"
+                            id="id"
+                            value={ pedidos.length ? ((pedidos[pedidos.length - 1]).numeroOrden*1) + 1 : 1 }
+                        />
                     </div>
-                    <Button className="mt-5 mb-5 mr-2 ml-2" size="lg" variant="info" type="submit">Cargar pedido</Button>
-                    <Button className="mt-5 mb-5 mr-2 ml-2" size="lg" variant="info" onClick={this.redireccionar}> Cancelar </Button>
-                </Form>
-            </div>
-        )
-    }
-}
+                    <div className="p-3 mr-5 ml-5 container">
+                        <input type="date" placeholder="Fecha de Entrega" id="fecha" />
+                    </div>
+                    <div className="p-3 mr-5 ml-5 container">
+                        <input type="number" placeholder="Cantidad" id="cantidad" />
+                    </div>
+                    <div className="p-3 mr-5 ml-5 container">
+                        <input type="text" placeholder="Nombre del Cliente" id="cliente" />
+                    </div>
+                    <div className="p-3 mr-5 ml-5 container">
+                        <input type="text" placeholder="Importe" id="importe" />
+                    </div>
+                </div>
+                <Button className="mt-5 mb-5 mr-2 ml-2" size="lg" variant="info" type="submit">
+                    Cargar pedido
+        </Button>
+                <Button className="mt-5 mb-5 mr-2 ml-2" size="lg" variant="info" onClick={redireccionar}>
+                    Cancelar
+        </Button>
+            </Form>
+        </div>
+    );
+};
 
 export default CargarPedido;
