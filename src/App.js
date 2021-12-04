@@ -1,9 +1,9 @@
 import Home from './components/CargarPedido';
 import CargarPedido from './components/Home';
-import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
-import {Route, Redirect} from 'react-router-dom';
 import './App.css';
+
+const { React} = require("react");
+const { BrowserRouter, Route, Redirect } = require("react-router-dom");
 
 function App() {
 
