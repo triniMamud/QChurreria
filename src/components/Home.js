@@ -21,7 +21,7 @@ const Home = () => {
     return (
         <>
             <Container>
-                <img src={Imagen} alt="QChurreria" />
+                <img src={Imagen} alt="QChurreria"/>
                 <div>
                     <h3>Cantidad de churros a producir mañana: { pedidos
                         .filter(pedido => 
@@ -34,7 +34,7 @@ const Home = () => {
                 </div>
                 <br />
                 <Link to="/cargarPedido" style={{ textDecoration: 'none' }}>
-                    <Button style={{ paddingLeft: 13 }}>Cargar Pedido</Button>
+                    <Button className="mt-5 mb-5 mr-2 ml-2" style={{backgroundColor: '#a0522d', borderColor:'#a0522d', paddingLeft: 13}} size="lg">Cargar Pedido</Button>
                 </Link>
                 <br /><br />
                 <Table>
@@ -55,7 +55,7 @@ const Home = () => {
                                 <td>{pedido.cliente}</td>
                                 <td>{pedido.importe}</td>
                                 <td>
-                                    <Button color="danger" onClick={()=>eliminar(pedido.numeroOrden)}>Eliminar</Button>
+                                    <Button variant="danger" onClick={()=>eliminar(pedido.numeroOrden)}>Eliminar</Button>
                                 </td>
                             </tr>
                         )}

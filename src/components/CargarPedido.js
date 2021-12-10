@@ -32,10 +32,10 @@ const CargarPedido = () => {
     };
 
     return (
-        <div className="form">
-            <Form onSubmit={handleForm}>
-                <h2>Cargar nuevo pedido</h2>
-                <div className=" justify-content-center">
+        <div id="form" className="justify-content-center">
+            <Form classname="justify-content-center" onSubmit={handleForm}>
+                <h2 className="pb-20">Cargar nuevo pedido</h2>
+                <div className="justify-content-center">
                     <div className="p-3 mr-5 ml-5 container">
                         <input
                             disabled
@@ -57,12 +57,14 @@ const CargarPedido = () => {
                         <input type="text" placeholder="Importe" id="importe" />
                     </div>
                 </div>
-                <Button className="mt-5 mb-5 mr-2 ml-2" size="lg" variant="info" type="submit">
-                    Cargar pedido
-        </Button>
-                <Button className="mt-5 mb-5 mr-2 ml-2" size="lg" variant="info" onClick={redireccionar}>
-                    Cancelar
-        </Button>
+                <div>
+                    <Button className="mt-5 mb-5 mr-2 ml-2 btn btn-danger" size="lg" onClick={redireccionar}>
+                        Cancelar
+                    </Button>
+                    <Button className="mt-5 mb-5 mr-2 ml-2 btn btn-success" size="lg" type="submit">
+                        Cargar pedido
+                    </Button>
+                </div>
             </Form>
         </div>
     );
